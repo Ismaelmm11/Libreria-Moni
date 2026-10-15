@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moni Books | Librería Acogedora & Historias con Alma</title>
+  <meta name="description" content="Descubre nuevas historias, libros destacados y escritores de moda en Moni Books. Tu librería moderna, cálida y creativa.">
+
+  <!-- GOOGLE FONTS OBLIGATORIAS: Kablammo (Display/Títulos) y Crimson Pro (Serif/Cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Kablammo&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES CSS - REGLA 60-30-10 ESTRICTA
+       60% Dominante : #FEF3E2 (Crema cálido)
+       30% Secundario: #D4621A (Terracota / Calabaza)
+       10% Acento     : #2A1A0E (Marrón café muy oscuro)
+       ========================================================================== */
+    :root {
+      /* Paleta estricta */
+      --color-dominant: #FEF3E2;          /* 60% Fondos generales y amplitud */
+      --color-dominant-card: #FFFBF5;     /* Variación suave de fondo para tarjetas */
+      --color-dominant-light: #FFFFFF;    /* Blanco puro para contrastes interiores */
+      
+      --color-secondary: #D4621A;         /* 30% Terracota: bloques, badges, bordes decorativos */
+      --color-secondary-hover: #B85012;   /* Hover interactivo del secundario */
+      --color-secondary-soft: rgba(212, 98, 26, 0.12); /* Fondos secundarios sutiles */
+      --color-secondary-border: rgba(212, 98, 26, 0.35);
+
+      --color-accent: #2A1A0E;            /* 10% Acento: Textos de máxima legibilidad, CTAs y bordes */
+      --color-accent-soft: rgba(42, 26, 14, 0.78);
+      --color-accent-light: rgba(42, 26, 14, 0.08);
+
+      /* Tipografías */
+      --font-display: 'Kablammo', cursive, sans-serif;
+      --font-body: 'Crimson Pro', Georgia, serif;
+
+      /* Sombras y transiciones */
+      --shadow-sm: 0 4px 12px rgba(42, 26, 14, 0.06);
+      --shadow-md: 0 10px 24px rgba(42, 26, 14, 0.10);
+      --shadow-lg: 0 18px 36px rgba(42, 26, 14, 0.14);
+      --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+    }
+
+    /* Reset y base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 17px;
+    }
+
+    body {
+      background-color: var(--color-dominant);
+      color: var(--color-accent);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      line-height: 1.68;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .logo-text {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-accent);
+      letter-spacing: 0.5px;
+    }
+
+    p, a, button, input, span, label {
+      font-family: var(--font-body);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1220px;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    /* ==========================================================================
+       HEADER & NAVEGACIÓN
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(254, 243, 226, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--color-secondary-border);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--color-secondary);
+      border: 2px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-dominant);
+      box-shadow: 3px 3px 0 var(--color-accent);
+      transition: var(--transition-smooth);
+    }
+
+    .logo:hover .logo-icon {
+      transform: rotate(-6deg) scale(1.05);
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      color: var(--color-accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      position: relative;
+      padding: 0.35rem 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2.5px;
+      background-color: var(--color-secondary);
+      transition: var(--transition-smooth);
+      border-radius: 2px;
+    }
+
+    .nav-link:hover {
+      color: var(--color-secondary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .cart-btn {
+      position: relative;
+      background: transparent;
+      border: 2px solid var(--color-accent);
+      border-radius: var(--radius-full);
+      padding: 0.55rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .cart-btn:hover {
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      transform: translateY(-2px);
+    }
+
+    .cart-badge {
+      background-color: var(--color-secondary);
+      color: var(--color-dominant);
+      font-size: 0.8rem;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       HERO SECTION
+       ========================================================================== */
+    .hero-section {
+      padding: 4.5rem 0 5.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--color-secondary-soft);
+      border: 1.5px solid var(--color-secondary);
+      color: var(--color-secondary);
+      padding: 0.4rem 1.1rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5.5vw, 4.3rem);
+      color: var(--color-accent);
+      margin-bottom: 1.5rem;
+      line-height: 1.15;
+    }
+
+    .hero-title span {
+      color: var(--color-secondary);
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: 1.35rem;
+      color: var(--color-accent-soft);
+      margin-bottom: 2.2rem;
+      max-width: 540px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Botón CTA Principal (Regla 10% de acento: Marrón café #2A1A0E) */
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      border: 2px solid var(--color-accent);
+      padding: 0.95rem 2rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      box-shadow: 0 6px 18px rgba(42, 26, 14, 0.2);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+      color: var(--color-dominant);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(212, 98, 26, 0.35);
+    }
+
+    /* Botón Secundario (Regla 30%: Terracota #D4621A) */
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-accent);
+      border: 2px solid var(--color-secondary);
+      padding: 0.95rem 1.8rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-dominant);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1.5px dashed var(--color-secondary-border);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--color-secondary);
+    }
+
+    .stat-desc {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-accent-soft);
+    }
+
+    /* Composición Visual del Hero */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-card-wrapper {
+      position: relative;
+      background: var(--color-secondary);
+      border: 3px solid var(--color-accent);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 12px 14px 0 var(--color-accent);
+      transition: var(--transition-smooth);
+    }
+
+    .hero-card-wrapper:hover {
+      transform: translateY(-4px) rotate(-0.5deg);
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      border-radius: calc(var(--radius-lg) - 6px);
+      border: 2px solid var(--color-accent);
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--color-dominant);
+      border: 2.5px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.2rem;
+      box-shadow: 4px 6px 0 var(--color-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 240px;
+      animation: float 4s ease-in-out infinite alternate;
+    }
+
+    .badge-icon {
+      font-size: 1.8rem;
+    }
+
+    .badge-text {
+      font-size: 0.95rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .badge-text small {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-secondary);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
+    }
+
+    /* ==========================================================================
+       FRANJA DE CARACTERÍSTICAS (BENEFICIOS)
+       ========================================================================== */
+    .features-bar {
+      background-color: var(--color-dominant-card);
+      border-block: 2px solid var(--color-secondary-border);
+      padding: 2rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      transition: var(--transition-smooth);
+    }
+
+    .feature-item:hover {
+      background-color: var(--color-secondary-soft);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      background-color: var(--color-secondary);
+      border: 2px solid var(--color-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-dominant);
+      flex-shrink: 0;
+      box-shadow: 2px 2px 0 var(--color-accent);
+    }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--color-accent);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--color-accent-soft);
+    }
+
+    /* ==========================================================================
+       SECCIÓN 1: LIBROS MÁS DESTACADOS
+       ========================================================================== */
+    .section-books {
+      padding: 6rem 0;
+      background-color: var(--color-dominant);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      margin-bottom: 1rem;
+      color: var(--color-accent);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-accent-soft);
+    }
+
+    /* Grid de libros (4 columnas escritorio, 1 móvil) */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .book-card {
+      background-color: var(--color-dominant-card);
+      border: 2.5px solid var(--color-accent);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 6px 6px 0 var(--color-accent);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .book-card:hover {
+      transform: translateY(-9px);
+      box-shadow: 10px 14px 0 var(--color-secondary);
+      border-color: var(--color-accent);
+    }
+
+    .book-cover-container {
+      position: relative;
+      height: 310px;
+      overflow: hidden;
+      background-color: #E8D8C3;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .book-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .book-card:hover .book-cover-img {
+      transform: scale(1.06);
+    }
+
+    /* Etiqueta / Badge usando el Color Secundario (#D4621A) */
+    .book-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background-color: var(--color-secondary);
+      color: var(--color-dominant);
+      border: 1.5px solid var(--color-accent);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 2px 2px 0 var(--color-accent);
+      z-index: 2;
+    }
+
+    .book-info {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .book-rating {
+      color: var(--color-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .book-title {
+      font-size: 1.4rem;
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--color-accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .book-author {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--color-accent-soft);
+      margin-bottom: 1.25rem;
+    }
+
+    .book-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1.5px dashed var(--color-secondary-border);
+    }
+
+    .book-price {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      color: var(--color-accent);
+    }
+
+    /* Botón Añadir al Carrito (Acento #2A1A0E) */
+    .btn-add-cart {
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      border: 1.5px solid var(--color-accent);
+      padding: 0.55rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-add-cart:hover {
+      background-color: var(--color-secondary);
+      border-color: var(--color-secondary);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       SECCIÓN 2: ESCRITORES DE MODA
+       Diseño diferenciado: Tarjetas ricas con bordes decorativos en #D4621A
+       ========================================================================== */
+    .section-authors {
+      padding: 6.5rem 0;
+      background: linear-gradient(180deg, var(--color-dominant) 0%, rgba(212, 98, 26, 0.08) 50%, var(--color-dominant) 100%);
+      position: relative;
+    }
+
+    .authors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2.25rem;
+    }
+
+    .author-card {
+      background-color: var(--color-dominant-card);
+      border: 3px solid var(--color-secondary);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(212, 98, 26, 0.12);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .author-card::before {
+      content: '“';
+      position: absolute;
+      top: 15px;
+      right: 22px;
+      font-family: var(--font-body);
+      font-size: 4.5rem;
+      line-height: 1;
+      color: var(--color-secondary);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .author-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(212, 98, 26, 0.22);
+      border-color: var(--color-accent);
+    }
+
+    /* Avatar circular grande con bordes en #D4621A */
+    .author-avatar-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin-bottom: 1.5rem;
+    }
+
+    .author-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--color-secondary);
+      box-shadow: 0 0 0 4px var(--color-dominant), 0 8px 16px rgba(42, 26, 14, 0.15);
+      transition: var(--transition-smooth);
+    }
+
+    .author-card:hover .author-avatar {
+      transform: scale(1.05);
+      border-color: var(--color-accent);
+    }
+
+    .author-trending-tag {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      border: 1.5px solid var(--color-dominant);
+    }
+
+    .author-name {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--color-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .author-quote {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--color-accent-soft);
+      line-height: 1.55;
+      margin-bottom: 1.5rem;
+      min-height: 3.2em;
+    }
+
+    .author-bestseller {
+      background-color: var(--color-secondary-soft);
+      border: 1.5px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .bestseller-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--color-secondary);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .bestseller-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-accent);
+    }
+
+    /* ==========================================================================
+       BANNER DE COMUNIDAD / LECTURA (EQUILIBRIO 30% TERRACÓTA)
+       ========================================================================== */
+    .community-banner {
+      padding: 4.5rem 0;
+    }
+
+    .community-card {
+      background: var(--color-secondary);
+      border: 3px solid var(--color-accent);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2.5rem;
+      color: var(--color-dominant);
+      box-shadow: 10px 10px 0 var(--color-accent);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .community-content h2 {
+      color: var(--color-dominant);
+      font-size: clamp(2.2rem, 3.8vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .community-content p {
+      color: var(--color-dominant);
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 440px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-full);
+      border: 2px solid var(--color-accent);
+      background-color: var(--color-dominant);
+      color: var(--color-accent);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .newsletter-input:focus {
+      box-shadow: 0 0 0 3px rgba(42, 26, 14, 0.3);
+    }
+
+    .newsletter-btn {
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      border: 2px solid var(--color-accent);
+      padding: 0.9rem 1.6rem;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .newsletter-btn:hover {
+      background-color: var(--color-dominant);
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       FOOTER
+       Armonía 60-30-10: Base crema con detalles en terracota y textos en café oscuro
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--color-dominant);
+      border-top: 3px solid var(--color-secondary);
+      padding: 5rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand p {
+      color: var(--color-accent-soft);
+      margin: 1.2rem 0;
+      font-size: 1.05rem;
+      max-width: 320px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--color-accent);
+      margin-bottom: 1.3rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 32px;
+      height: 3px;
+      background-color: var(--color-secondary);
+      border-radius: 2px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--color-accent-soft);
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-secondary);
+      padding-left: 6px;
+    }
+
+    .footer-contact-info {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      color: var(--color-accent-soft);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    .footer-contact-icon {
+      color: var(--color-secondary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--color-accent);
+      background-color: var(--color-dominant-card);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+      box-shadow: 2px 2px 0 var(--color-secondary);
+      transition: var(--transition-smooth);
+    }
+
+    .social-btn:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-dominant);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1.5px solid var(--color-secondary-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+      color: var(--color-accent-soft);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a:hover {
+      color: var(--color-secondary);
+    }
+
+    /* Toast interactivo para feedback de compra */
+    .toast-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--color-accent);
+      color: var(--color-dominant);
+      border: 2px solid var(--color-secondary);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.4rem;
+      box-shadow: 0 10px 25px rgba(42, 26, 14, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 999;
+      transform: translateY(120px);
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .toast-notification.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (MEDIA QUERIES)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .hero-visual {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .community-card {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.75rem;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 84px;
+        left: 0;
+        right: 0;
+        background-color: var(--color-dominant);
+        border-bottom: 3px solid var(--color-secondary);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition-smooth);
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-menu.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .books-grid {
+        grid-template-columns: 1fr; /* 1 columna en móvil como exige la consigna */
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. HEADER / NAVEGACIÓN
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <!-- Logo Moni Books -->
+      <a href="#inicio" class="logo">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+        </div>
+        <span class="logo-text">Moni Books</span>
+      </a>
+
+      <!-- Menú de navegación -->
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#destacados" class="nav-link">Libros Destacados</a></li>
+          <li><a href="#escritores" class="nav-link">Escritores de Moda</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Botón de carrito y menú móvil -->
+      <div class="nav-actions">
+        <button class="cart-btn" id="headerCartBtn" aria-label="Ver carrito de compras">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Cesta</span>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         2. SECCIÓN HERO (PRINCIPAL)
+         ========================================================================== -->
+    <section class="hero-section" id="inicio">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Contenido textual del Hero -->
+          <div class="hero-content">
+            <span class="hero-tag">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+              </svg>
+              Librería Independiente & Café
+            </span>
+
+            <h1 class="hero-title">
+              Donde cada página despierta una <span>nueva emoción</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Sumérgete en el aroma a papel nuevo, café de especialidad y relatos inolvidables. En <strong>Moni Books</strong> curamos historias que abrazan el alma y encienden la imaginación.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#destacados" class="btn-primary">
+                <span>Explorar el catálogo</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+
+              <a href="#escritores" class="btn-secondary">
+                <span>Conoce a los autores</span>
+              </a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-num">+4,800</span>
+                <span class="stat-desc">Títulos seleccionados</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">98%</span>
+                <span class="stat-desc">Lectores felices</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">24h</span>
+                <span class="stat-desc">Envío literario exprés</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Composición Visual Creativa -->
+          <div class="hero-visual">
+            <div class="hero-card-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1507842229451-7f01be8610ce?auto=format&fit=crop&w=900&q=80" 
+                alt="Ambiente acogedor de librería Moni Books con estanterías y libros cálidos" 
+                class="hero-image"
+                loading="eager"
+              >
+              
+              <!-- Badge Flotante Interactivo -->
+              <div class="hero-floating-badge">
+                <div class="badge-icon" aria-hidden="true">☕📖</div>
+                <div class="badge-text">
+                  El Rincón del Lector
+                  <small>Café & lectura pausada</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Franja de Valores Literarios -->
+    <section class="features-bar" aria-label="Ventajas de Moni Books">
+      <div class="container">
+        <div class="features-grid">
+          
+          <div class="feature-item">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div>
+              <h4 class="feature-title">Envío Gratis desde 25€</h4>
+              <p class="feature-desc">Empaquetado ecológico con marcapáginas de regalo.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="feature-title">Curaduría Artesanal</h4>
+              <p class="feature-desc">Cada libro es leído y recomendado por libreros.</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 class="feature-title">Club de Lectura Moni</h4>
+              <p class="feature-desc">Charlas mensuales en directo con autores y autoras.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. SECCIÓN DE "LIBROS MÁS DESTACADOS"
+         ========================================================================== -->
+    <section class="section-books" id="destacados">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow">Selección de la temporada</span>
+          <h2 class="section-title">Libros Más Destacados</h2>
+          <p class="section-subtitle">
+            Obras que despiertan conversaciones, roban madrugadas y dejan huella en las estanterías de nuestra comunidad.
+          </p>
+        </div>
+
+        <!-- Grid de Libros (4 col escritorio, 1 móvil) -->
+        <div class="books-grid">
+
+          <!-- Libro 1 -->
+          <article class="book-card">
+            <div class="book-cover-container">
+              <span class="book-badge">Bestseller</span>
+              <img 
+                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80" 
+                alt="Portada del libro La Ciudad Invisible" 
+                class="book-cover-img"
+                loading="lazy"
+              >
+            </div>
+            <div class="book-info">
+              <div class="book-rating" aria-label="Calificación 5 de 5">★★★★★ (142)</div>
+              <h3 class="book-title">La Ciudad Invisible</h3>
+              <p class="book-author">Elena Morales</p>
+              <div class="book-footer">
+                <span class="book-price">21,90 €</span>
+                <button class="btn-add-cart" data-title="La Ciudad Invisible">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>Añadir</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Libro 2 -->
+          <article class="book-card">
+            <div class="book-cover-container">
+              <span class="book-badge">Ficción Histórica</span>
+              <img 
+                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" 
+                alt="Portada del libro El Susurro del Olivo" 
+                class="book-cover-img"
+                loading="lazy"
+              >
+            </div>
+            <div class="book-info">
+              <div class="book-rating" aria-label="Calificación 5 de 5">★★★★★ (98)</div>
+              <h3 class="book-title">El Susurro del Olivo</h3>
+              <p class="book-author">Carlos M. Vega</p>
+              <div class="book-footer">
+                <span class="book-price">19,50 €</span>
+                <button class="btn-add-cart" data-title="El Susurro del Olivo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>Añadir</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Libro 3 -->
+          <article class="book-card">
+            <div class="book-cover-container">
+              <span class="book-badge">Premio Literario</span>
+              <img 
+                src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80" 
+                alt="Portada del libro Jardines de Medianoche" 
+                class="book-cover-img"
+                loading="lazy"
+              >
+            </div>
+            <div class="book-info">
+              <div class="book-rating" aria-label="Calificación 5 de 5">★★★★★ (215)</div>
+              <h3 class="book-title">Jardines de Medianoche</h3>
+              <p class="book-author">Sofía Alarcón</p>
+              <div class="book-footer">
+                <span class="book-price">22,00 €</span>
+                <button class="btn-add-cart" data-title="Jardines de Medianoche">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>Añadir</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Libro 4 -->
+          <article class="book-card">
+            <div class="book-cover-container">
+              <span class="book-badge">Thriller Psicológico</span>
+              <img 
+                src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=600&q=80" 
+                alt="Portada del libro Ecos en la Niebla" 
+                class="book-cover-img"
+                loading="lazy"
+              >
+            </div>
+            <div class="book-info">
+              <div class="book-rating" aria-label="Calificación 4.8 de 5">★★★★☆ (87)</div>
+              <h3 class="book-title">Ecos en la Niebla</h3>
+              <p class="book-author">Mateo D. Rivas</p>
+              <div class="book-footer">
+                <span class="book-price">20,80 €</span>
+                <button class="btn-add-cart" data-title="Ecos en la Niebla">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                  <span>Añadir</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         4. SECCIÓN DE "ESCRITORES DE MODA"
+         ========================================================================== -->
+    <section class="section-authors" id="escritores">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-eyebrow">Voces contemporáneas</span>
+          <h2 class="section-title">Escritores de Moda</h2>
+          <p class="section-subtitle">
+            Las plumas más brillantes y comentadas del panorama literario actual. Conoce a los creadores detrás de tus próximas historias favoritas.
+          </p>
+        </div>
+
+        <div class="authors-grid">
+
+          <!-- Autor 1 -->
+          <article class="author-card">
+            <div class="author-avatar-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" 
+                alt="Retrato de Lucía Barrientos" 
+                class="author-avatar"
+                loading="lazy"
+              >
+              <span class="author-trending-tag">Top Tendencia</span>
+            </div>
+            <h3 class="author-name">Lucía Barrientos</h3>
+            <p class="author-quote">
+              «Escribir es encender una pequeña vela en la habitación más oscura de la memoria colectiva.»
+            </p>
+            <div class="author-bestseller">
+              <span class="bestseller-label">Obra más vendida</span>
+              <p class="bestseller-title">Mares de Ceniza y Sal</p>
+            </div>
+          </article>
+
+          <!-- Autor 2 -->
+          <article class="author-card">
+            <div class="author-avatar-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" 
+                alt="Retrato de Carlos M. Vega" 
+                class="author-avatar"
+                loading="lazy"
+              >
+              <span class="author-trending-tag">Favorito del Club</span>
+            </div>
+            <h3 class="author-name">Carlos M. Vega</h3>
+            <p class="author-quote">
+              «La historia no se repite, pero rima con una belleza dolorosa en cada nuevo amanecer.»
+            </p>
+            <div class="author-bestseller">
+              <span class="bestseller-label">Obra más vendida</span>
+              <p class="bestseller-title">El Susurro del Olivo</p>
+            </div>
+          </article>
+
+          <!-- Autor 3 -->
+          <article class="author-card">
+            <div class="author-avatar-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" 
+                alt="Retrato de Sofía Alarcón" 
+                class="author-avatar"
+                loading="lazy"
+              >
+              <span class="author-trending-tag">Premio Crítica</span>
+            </div>
+            <h3 class="author-name">Sofía Alarcón</h3>
+            <p class="author-quote">
+              «Construyo mundos fantásticos porque la realidad merece ser contemplada con asombro infinito.»
+            </p>
+            <div class="author-bestseller">
+              <span class="bestseller-label">Obra más vendida</span>
+              <p class="bestseller-title">Jardines de Medianoche</p>
+            </div>
+          </article>
+
+          <!-- Autor 4 -->
+          <article class="author-card">
+            <div class="author-avatar-wrapper">
+              <img 
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" 
+                alt="Retrato de Mateo D. Rivas" 
+                class="author-avatar"
+                loading="lazy"
+              >
+              <span class="author-trending-tag">Maestro del Suspense</span>
+            </div>
+            <h3 class="author-name">Mateo D. Rivas</h3>
+            <p class="author-quote">
+              «El verdadero secreto de un buen enigma reside en lo que el protagonista calla ante el espejo.»
+            </p>
+            <div class="author-bestseller">
+              <span class="bestseller-label">Obra más vendida</span>
+              <p class="bestseller-title">Ecos en la Niebla</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner de suscripción / Comunidad Moni -->
+    <section class="community-banner">
+      <div class="container">
+        <div class="community-card">
+          <div class="community-content">
+            <h2>Únete al Club de Lectores Moni</h2>
+            <p>
+              Recibe mensualmente recomendaciones íntimas, invitaciones a encuentros exclusivos con autores y un 10% de bienvenida en tu primera compra literaria.
+            </p>
+          </div>
+          <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); handleNewsletter();">
+            <input 
+              type="email" 
+              class="newsletter-input" 
+              placeholder="Tu correo electrónico..." 
+              required
+              aria-label="Correo para newsletter literaria"
+            >
+            <button type="submit" class="newsletter-btn">Suscribirme</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       5. FOOTER
+       ========================================================================== -->
+  <footer class="site-footer" id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Columna Marca -->
+        <div class="footer-brand">
+          <a href="#inicio" class="logo">
+            <div class="logo-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </div>
+            <span class="logo-text">Moni Books</span>
+          </a>
+          <p>
+            Un refugio para los amantes de las letras, el café recién molido y los libros que cambian la perspectiva del mundo.
+          </p>
+          <div class="social-links" aria-label="Redes sociales">
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Goodreads / Libros">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Twitter / X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna Enlaces Rápidos -->
+        <div>
+          <h4 class="footer-heading">Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#destacados">Libros Destacados</a></li>
+            <li><a href="#escritores">Escritores de Moda</a></li>
+            <li><a href="#inicio">Club de Lectura</a></li>
+            <li><a href="#inicio">Talleres Literarios</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna Categorías -->
+        <div>
+          <h4 class="footer-heading">Géneros</h4>
+          <ul class="footer-links">
+            <li><a href="#destacados">Novela Contemporánea</a></li>
+            <li><a href="#destacados">Ficción Histórica</a></li>
+            <li><a href="#destacados">Poesía & Ensayo</a></li>
+            <li><a href="#destacados">Misterio & Thriller</a></li>
+            <li><a href="#destacados">Infantil & Juvenil</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna Contacto y Horarios -->
+        <div>
+          <h4 class="footer-heading">Ven a visitarnos</h4>
+          <ul class="footer-contact-info">
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon">📍</span>
+              <span>Calle de los Libreros, 14<br>Barrio de las Letras, Ciudad</span>
+            </li>
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon">🕒</span>
+              <span>Lunes a Sábado: 10:00 - 20:30 h<br>Domingos: 11:00 - 15:00 h</span>
+            </li>
+            <li class="footer-contact-item">
+              <span class="footer-contact-icon">✉️</span>
+              <span>hola@monibooks.com</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Barra inferior de copyright -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 Moni Books. Todos los derechos reservados. Diseñado con pasión literaria.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Aviso Legal</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notificación Toast interactiva -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-secondary);">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toastMessage">¡Libro añadido a tu cesta literaria!</span>
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPTS DE MICRO-INTERACCIÓN Y FUNCIONALIDAD
+       ========================================================================== -->
+  <script>
+    // Contador de Carrito y Notificación Toast
+    let cartTotal = 0;
+    const cartCountElem = document.getElementById('cartCount');
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMessage');
+    let toastTimeout;
+
+    function showToast(message) {
+      clearTimeout(toastTimeout);
+      toastMsg.textContent = message;
+      toast.classList.add('active');
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3200);
+    }
+
+    // Event listeners para botones "Añadir al carrito"
+    document.querySelectorAll('.btn-add-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        const title = button.getAttribute('data-title') || 'Libro';
+        cartTotal++;
+        cartCountElem.textContent = cartTotal;
+
+        // Animación suave en el contador
+        cartCountElem.style.transform = 'scale(1.35)';
+        setTimeout(() => {
+          cartCountElem.style.transform = 'scale(1)';
+        }, 200);
+
+        showToast(`«${title}» se ha añadido a tu cesta.`);
+      });
+    });
+
+    // Manejo de suscripción al newsletter
+    function handleNewsletter() {
+      showToast('¡Bienvenido al Club Moni Books! Revisa tu bandeja de entrada.');
+      document.getElementById('newsletterForm').reset();
+    }
+
+    // Toggle de Menú Móvil
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    mobileBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('is-open');
+    });
+
+    // Cerrar menú móvil al pulsar un enlace
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('is-open');
+      });
+    });
+
+    // Carrito de compras header click
+    document.getElementById('headerCartBtn').addEventListener('click', () => {
+      if (cartTotal === 0) {
+        showToast('Tu cesta literaria está vacía por ahora.');
+      } else {
+        showToast(`Tienes ${cartTotal} libro(s) seleccionado(s).`);
+      }
+    });
+  </script>
+
+</body>
+</html>
